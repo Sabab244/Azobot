@@ -1,16 +1,38 @@
-// Updated index.js for proper login handling with delays and command execution
+const express = require('express');
+const mineflayer = require('mineflayer');
 
-const { Client, GatewayIntentBits } = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const app = express();
+const PORT = 3000;
 
-const DELAY_MS = 2000; // 2 seconds delay
-
-client.once('ready', async () => {
-    console.log(`Logged in as ${client.user.tag}`);
-    // Adding a delay before executing commands
-    await new Promise(resolve => setTimeout(resolve, DELAY_MS));
-    // Execute any subsequent command here
-    // Example: await executeCommands();
+app.get('/', (req, res) => {
+    res.send('Hello from the Azobot server!');
 });
 
-client.login('YOUR_BOT_TOKEN'); // Ensure to set your bot token here
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+const bot = mineflayer.createBot({
+    host: 'your_server_ip', // Replace with your server IP
+    port: 25565, // Port default for Minecraft
+    username: 'your_bot_username', // Replace with your bot username
+    password: 'your_bot_password' // Replace with your bot password
+});
+
+bot.on('spawn', () => {
+    console.log('Bot has spawned!');
+
+    // Delay before sending login command
+    setTimeout(() => {
+        bot.chat('/login your_password'); // Replace 'your_password' with actual password
+    }, 5000); // 5 seconds delay
+
+    // Delay before sending register command
+    setTimeout(() => {
+        bot.chat('/register your_password your_email'); // Replace with actual details
+    }, 10000); // 10 seconds delay
+});
+
+bot.on('error', (err) => {
+    console.error('Error:', err);
+});
