@@ -1,0 +1,1 @@
+{ "name": "azobot", "version": "1.0.0", "description": "Minecraft bot using Mineflayer", "main": "index.js", "type": "module", "scripts": { "start": "node index.js", "dev": "node index.js" }, "keywords": ["minecraft", "bot", "mineflayer"], "author": "Sabab244", "license": "MIT", "dependencies": { "express": "^4.18.2", "mineflayer": "^4.14.0" } }
