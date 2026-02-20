@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Bot Dashboard</title>
+</head>
+<body>
+    <h1>Minecraft Bot Dashboard</h1>
+    <div id="status">
+        <h2>Bot Status</h2>
+        <p id="botStatus">Loading...</p>
+    </div>
+    <div id="serverInfo">
+        <h2>Server Information</h2>
+        <p id="serverName">Server: Loading...</p>
+        <p id="serverIP">IP Address: Loading...</p>
+        <p id="playerCount">Players Online: Loading...</p>
+    </div>
+    <div id="connectionDetails">
+        <h2>Connection Details</h2>
+        <p id="serverStatus">Status: Connecting...</p>
+    </div>
+    <script>
+        // Example script to simulate fetching data
+        setTimeout(() => {
+            document.getElementById('botStatus').innerText = 'Online';
+            document.getElementById('serverName').innerText = 'Server: My Minecraft Server';
+            document.getElementById('serverIP').innerText = 'IP Address: 192.168.1.1';
+            document.getElementById('playerCount').innerText = 'Players Online: 5';
+            document.getElementById('serverStatus').innerText = 'Status: Connected';
+        }, 2000);
+    </script>
+</body>
+</html>
