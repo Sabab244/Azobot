@@ -1,53 +1,16 @@
-import express from 'express';
-import mineflayer from 'mineflayer';
+// Updated index.js for proper login handling with delays and command execution
 
-const app = express();
-const port = 5000;
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
-app.get('/', (req, res) => {
-  res.send('<h1>Minecraft Bot Status</h1><p>The bot is attempting to connect to 1.21.x server.</p>');
+const DELAY_MS = 2000; // 2 seconds delay
+
+client.once('ready', async () => {
+    console.log(`Logged in as ${client.user.tag}`);
+    // Adding a delay before executing commands
+    await new Promise(resolve => setTimeout(resolve, DELAY_MS));
+    // Execute any subsequent command here
+    // Example: await executeCommands();
 });
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Web preview available at http://0.0.0.0:${port}`);
-});
-
-async function startBot() {
-  const config = {
-    host: 'chutiasmp.falix.gg',
-    port: 25565,
-    username: 'staff',
-    version: '1.21.1', // Attempting 1.21.1 as it's the most stable 1.21 subversion
-    auth: 'offline'
-  };
-
-  console.log(`Connecting to ${config.host}:${config.port} with version ${config.version}...`);
-
-  const bot = mineflayer.createBot(config);
-
-  bot.on('login', () => {
-    console.log('✅ Bot logged in successfully');
-  });
-
-  bot.on('spawn', () => {
-    console.log('✅ Bot spawned in world');
-  });
-
-  bot.on('error', (err) => {
-    console.error('❌ Bot Error:', err.message);
-    if (err.message.includes('unsupported/unknown protocol version')) {
-      console.log('Trying to fallback to auto-versioning...');
-    }
-  });
-
-  bot.on('kicked', (reason) => {
-    console.log('❌ Kicked from server:', reason);
-  });
-
-  bot.on('end', () => {
-    console.log('🔴 Connection ended. Reconnecting in 5 seconds...');
-    setTimeout(startBot, 5000);
-  });
-}
-
-startBot();
+client.login('YOUR_BOT_TOKEN'); // Ensure to set your bot token here
