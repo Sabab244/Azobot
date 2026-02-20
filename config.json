@@ -1,0 +1,1 @@
+{\n    "ip": "chutiasmp.falix.gg",\n    "port": 25565,\n    "name": "staff",\n    "version": "1.21",\n    "auto-reconnect": true,\n    "comment": "If True Then Bot Will Skip Night",\n    "login-enabled": true,\n    "comment": "If True Then Bot Will Login/Register",\n    "register-cmd": "/register bot123 bot123",\n    "login-cmd": "/login bot123"\n}
